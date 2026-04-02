@@ -11,3 +11,8 @@
   color: green;
   display: inline-block;
 }
+hr {
+  height: 2px;
+  background-color: blue;
+  border: none;
+}
