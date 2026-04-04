@@ -82,23 +82,48 @@ function Header() {
   return <h1 className="header">Fast Pizza Company Ltd</h1>;
 }
 function Menu({ pizzaData }) {
+  const pizzas = pizzaData;
+  const numPizzas = pizzas.length;
+
   return (
     <div className="menu">
       <hr></hr>
       <h2>OUR MENU</h2>
       <hr></hr>
-      <ul className="pizzas">
-        {pizzaData.map((pizza) => (
-          <Pizza pizzaObject={pizza} key={pizza.id} />
-        ))}
-      </ul>
+      {numPizzas > 0 ? (
+        <ul className="pizzas">
+          {pizzas.map((pizza) => (
+            <Pizza pizzaObject={pizza} key={pizza.id} />
+          ))}
+        </ul>
+      ) : (
+        <p>We are currently working on our menu please check back later.</p>
+      )}
     </div>
   );
 }
 function Footer() {
+  const hour = new Date().getHours();
+  const openHour = 8;
+  const closeHour = 23;
+  const isOpen = hour >= openHour && hour < closeHour;
+  console.log(isOpen);
+
   return (
-    <footer>
-      We are open 24hrs! make your order now! Call us at 0707297649
+    <footer className="footer">
+      {isOpen ? (
+        <div className="order">
+          <p>
+            We are open until {closeHour}:00. Come visit us or order online.
+          </p>
+          <button className="btn">Order</button>
+        </div>
+      ) : (
+        <p>
+          We are currently closed. Our working hours are from {openHour}:00 to{" "}
+          {closeHour}:00.
+        </p>
+      )}
     </footer>
   );
 }
